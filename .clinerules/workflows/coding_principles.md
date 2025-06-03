@@ -1,6 +1,9 @@
 ---
 description: Princípios fundamentais de codificação para garantir qualidade, manutenibilidade e arquitetura modular
-globs: **/*
+author: Sistema GRUPOUS/Cline Rules
+version: 2.0
+globs: ["**/*"]
+tags: ["coding-principles", "architecture", "modular-design", "quality", "mandatory"]
 alwaysApply: true
 ---
 
