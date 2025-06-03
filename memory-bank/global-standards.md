@@ -116,6 +116,9 @@ const useCustomHook = (initialValue?: string) => {
 - **Colunas**: `snake_case` (ex: `created_at`, `user_id`)
 - **Relacionamentos**: `{table}_id` (ex: `user_id`, `appointment_id`)
 
+### Otimização de Consultas Complexas
+- Para dados analíticos ou relatórios, utilize `RPC functions` para encapsular lógica e `materialized views` para pré-computar e cachear resultados de consultas pesadas, melhorando a performance.
+
 ### RLS (Row Level Security)
 - **Sempre ativar** RLS em tabelas de produção
 - **Políticas claras**: Nome descritivo para cada política

@@ -74,7 +74,7 @@ Siga esta sequência obrigatória em todas as operações:
 ## Workflows e Ferramentas Disponíveis
 
 ### Desenvolvimento de Software
-- **Arquivo**: `.clinerules/workflows/dev_workflow.md`
+- **Arquivo**: `.clinerules/workflows/dev-workflow-unified.md`
 - **Uso**: Para tarefas de desenvolvimento, programação e gerenciamento de projetos
 - **Integração**: Utiliza Task Master MCP para gerenciamento de tarefas
 
@@ -98,7 +98,7 @@ Siga esta sequência obrigatória em todas as operações:
 - **Integração**: Coordena com error_handling e exige PLAN MODE para verificação
 
 ### Auto-Melhoria
-- **Arquivo**: Referenciado nas regras globais como `self_improve.md`
+- **Arquivo**: `.clinerules/self-improvement-unified.md`
 - **Uso**: Para evolução contínua dos protocolos e regras
 - **Aplicação**: Após cada tarefa significativa
 
