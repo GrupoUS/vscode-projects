@@ -65,6 +65,10 @@ Este protocolo ativa **imediatamente antes de usar `attempt_completion`** quando
 - **Qualquer pergunta de esclarecimento feita pelo usuário**
 - **Qualquer uso de ferramentas MCP especializadas** (`sequential-thinking`, `supabase`, etc.)
 - **Qualquer tarefa que requerer múltiplos comandos ou iterações**
+- **Qualquer tarefa que envolveu 3+ ferramentas MCP diferentes**
+- **Sessão > 8 minutos com 2+ iterações na mesma subtarefa**
+- **Usuário fez 2+ esclarecimentos sobre o mesmo aspecto**
+- **Erro similar ao registrado em consolidated_learnings.md**
 
 #### Comando de Ativação Manual
 - **Usuário pode forçar ativação** digitando `!reflect` em qualquer momento
@@ -92,12 +96,75 @@ Considere:
 - Workflows que poderiam ser mais eficientes
 - Validações que poderiam ser automatizadas
 
+#### Classificação de Insights
+Após identificar um gap, classifique o insight de acordo com o impacto e a urgência:
+- **CRÍTICO**: Previne erros que quebram funcionalidade, causam perda de dados ou impactam segurança.
+- **IMPORTANTE**: Melhora eficiência significativamente (>20%), reduz retrabalho ou aprimora UX.
+- **OTIMIZAÇÃO**: Refinamentos que agregam valor marginal, melhorias de performance menores ou legibilidade.
+- **EXPERIMENTAL**: Ideias para teste futuro, conceitos novos ou abordagens não comprovadas.
+
 #### Passo 3: Formulação de Sugestão
 Se identificou oportunidade de melhoria, formule:
 - **Descrição clara** do problema identificado
 - **Regra proposta** (formatada como código Markdown)
 - **Justificativa** de como melhoraria futuros desenvolvimentos
 - **Localização sugerida** no sistema de regras
+
+#### Templates Estruturados para Sugestões
+Para garantir consistência e clareza nas propostas de melhoria, utilize os seguintes templates:
+
+##### Template: Nova Regra Proposta
+```markdown
+## Proposta de Nova Regra para .clinerules
+
+**Categoria**: [Técnica/Processo/Ferramenta/UX/Segurança/Performance]
+**Prioridade**: [CRÍTICO/IMPORTANTE/OTIMIZAÇÃO/EXPERIMENTAL]
+**Trigger Identificado**: [Descreva a situação específica ou o padrão de atrito que ativou esta sugestão. Ex: "Erro recorrente ao configurar ambiente", "Padrão de código duplicado em 3+ arquivos"]
+**Problema Resolvido**: [Explique claramente o problema que esta nova regra visa resolver ou o atrito que ela previne. Seja conciso e direto.]
+**Regra Proposta**:
+```markdown
+---
+description: [Descrição clara de uma linha do que a regra enforce]
+globs: [path/to/files/*.ext, other/path/**/*]
+alwaysApply: [true/false]
+---
+
+- **[Ponto Principal em Negrito]**
+  - [Sub-ponto com detalhes]
+  - [Exemplos e explicações]
+```
+**Justificativa**: [Explique por que esta regra é necessária e como ela melhorará futuros desenvolvimentos. Mencione o impacto esperado (ex: redução de X% de erros, aumento de Y% na eficiência, padronização de Z).]
+**Impacto Esperado**: [Métrica ou benefício mensurável. Ex: "Redução de 30% no tempo de setup", "Eliminação de bugs de tipo X", "Melhora na legibilidade do código."]
+**Localização Sugerida**: [Caminho completo do arquivo onde a regra deve ser adicionada ou modificada. Ex: `.clinerules/workflows/new-feature-workflow.md`]
+```
+
+##### Template: Melhoria de Workflow Existente
+```markdown
+## Proposta de Melhoria para Workflow Existente
+
+**Workflow Afetado**: [Nome do workflow ou protocolo. Ex: "DEV_WORKFLOW", "Error Handling Protocol"]
+**Prioridade**: [CRÍTICO/IMPORTANTE/OTIMIZAÇÃO/EXPERIMENTAL]
+**Trigger Identificado**: [Descreva a situação específica ou o atrito que ativou esta sugestão. Ex: "Passos manuais excessivos", "Falta de clareza em uma etapa"]
+**Problema Resolvido**: [Explique claramente o problema que esta melhoria visa resolver. Ex: "Retrabalho devido a inconsistências", "Atraso na entrega de tarefas"]
+**Melhoria Proposta**: [Descreva a mudança específica no workflow. Pode ser um novo passo, uma automação, uma reordenação de etapas, etc.]
+**Justificativa**: [Explique por que esta melhoria é necessária e como ela otimizará o processo. Mencione o impacto esperado.]
+**Impacto Esperado**: [Métrica ou benefício mensurável. Ex: "Redução de 15% no tempo de execução do workflow", "Aumento da confiabilidade do processo."]
+**Localização Sugerida**: [Caminho completo do arquivo onde a melhoria deve ser documentada. Ex: `.clinerules/workflows/dev-workflow-unified.md`]
+```
+
+##### Template: Otimização de Ferramenta/MCP
+```markdown
+## Proposta de Otimização para Ferramenta/MCP
+
+**Ferramenta/MCP Afetada**: [Nome da ferramenta ou servidor MCP. Ex: "sequentialthinking", "Taskmaster CLI", "Figma-Context-MCP"]
+**Prioridade**: [CRÍTICO/IMPORTANTE/OTIMIZAÇÃO/EXPERIMENTAL]
+**Trigger Identificado**: [Descreva a situação específica ou o atrito que ativou esta sugestão. Ex: "Uso ineficiente da ferramenta", "Falta de integração com outro sistema"]
+**Problema Resolvido**: [Explique claramente o problema que esta otimização visa resolver. Ex: "Custo elevado de tokens", "Tempo de resposta lento", "Funcionalidade não explorada"]
+**Otimização Proposta**: [Descreva a mudança específica na configuração ou uso da ferramenta/MCP. Pode ser um novo parâmetro, uma forma de uso mais eficiente, uma integração.]
+**Justificativa**: [Explique por que esta otimização é necessária e como ela melhorará o desempenho ou custo. Mencione o impacto esperado.]
+**Impacto Esperado**: [Métrica ou benefício mensurável. Ex: "Redução de 20% no custo de tokens", "Aumento de 10% na velocidade de execução", "Melhora na precisão da IA."]
+**Localização Sugerida**: [Caminho completo do arquivo onde a otimização deve ser documentada. Ex: `.clinerules/sequential-thinking-mcp.md`, `.clinerules/00-cost-optimization.md`]
+```
 
 #### Passo 4: Proposta ao Usuário
 **ANTES** de prosseguir com `attempt_completion`:
@@ -166,33 +233,52 @@ Capturar e cristalizar conhecimento adquirido durante a execução, alimentando 
 ### Sistema de Feedback Visual
 **SEMPRE** anuncie quando ativar: **"📚 Executando Layer 4: Post-Task Learning - Capturando conhecimento e atualizando Memory Bank..."**
 
-### Protocolo de Captura de Conhecimento
+### Protocolo de Captura de Conhecimento (Sistema de 2 Camadas)
 
-#### Passo 1: Atualização do Task Log
+#### Passo 1: Captura Bruta (Raw Reflection)
+- **Registre em `memory-bank/raw_reflection_log.md`** entrada detalhada seguindo formato estruturado:
+  - Data/Hora/TaskRef
+  - Learnings específicos
+  - Dificuldades encontradas e soluções
+  - Sucessos e fatores contribuintes
+  - Itens identificados para consolidação
+- **Status**: Marque como "⏳ Pendente" para consolidação posterior
+
+#### Passo 2: Atualização do Task Log
 - Atualize `memory-bank/workspace-task-log.md` com entrada estruturada
 - Inclua: timestamp, resumo das ações, decisões tomadas, outcomes
 - Documente padrões ou técnicas descobertas
 
-#### Passo 2: Reflexão Estruturada
+#### Passo 3: Reflexão Estruturada
 Analise sistematicamente:
 - **Desafio Central**: Qual foi o problema core resolvido?
 - **Eficiência**: Como o processo poderia ser mais eficiente?
 - **Insight Chave**: Qual o learning mais importante?
 - **Padrões Emergentes**: Que padrões novos foram identificados?
 
-#### Passo 3: Cristalização do Conhecimento
-- Atualize `memory-bank/global-learnings.md` com "Post-Task Reflection"
-- Defina "Actionable Improvement" concreto
-- Documente técnicas ou soluções reutilizáveis
+#### Passo 4: Consolidação de Conhecimento (Quando Aplicável)
+Se insights são de alto valor e reutilizáveis:
+- **Atualize `memory-bank/consolidated_learnings.md`** com padrões refinados
+- **Organize por categoria** (Técnico, Gestão, Ferramentas, Problemas, etc.)
+- **Marque entrada em raw_reflection_log.md como "✅ Processado"**
 
-#### Passo 4: Atualização Operacional
+#### Passo 5: Atualização Operacional
 Se o "Actionable Improvement" define nova convenção permanente:
 - Atualize `memory-bank/global-project-overview.md`
 - Considere criar/atualizar regras específicas em `.clinerules`
 
-#### Passo 5: Confirmação Final
+#### Passo 6: Confirmação Final
 Conclua com a mensagem obrigatória:
-**"Tarefa completa. Memory Bank e conhecimento operacional atualizados através do Protocolo de Melhoria Contínua."**
+**"Tarefa completa. Memory Bank (raw + consolidated) e conhecimento operacional atualizados através do Protocolo de Melhoria Contínua."**
+
+#### Passo 5: Atualização Operacional
+Se o "Actionable Improvement" define nova convenção permanente:
+- Atualize `memory-bank/global-project-overview.md`
+- Considere criar/atualizar regras específicas em `.clinerules`
+
+#### Passo 6: Confirmação Final
+Conclua com a mensagem obrigatória:
+**"Tarefa completa. Memory Bank (raw + consolidated) e conhecimento operacional atualizados através do Protocolo de Melhoria Contínua."**
 
 ### Integração com Knowledge Graph
 - Registre insights no MCP Knowledge Graph quando disponível

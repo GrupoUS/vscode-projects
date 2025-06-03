@@ -63,13 +63,17 @@ Siga esta sequência obrigatória em todas as operações:
   - **Resolva gaps críticos** antes de finalizar
 - **Só após verificação**: Prossiga com `attempt_completion`
 
-### Passo 5: Protocolo de Melhoria Contínua
-- Após completar qualquer tarefa, reflita sobre:
+### Passo 5: Protocolo de Melhoria Contínua (Sistema de 2 Camadas)
+- **Layer 4 do Protocolo Unificado é OBRIGATÓRIO** após completar qualquer tarefa
+- **Sistema de Captura Dupla**:
+  - **Raw Reflection**: Registre em `memory-bank/raw_reflection_log.md`
+  - **Consolidated Learning**: Para insights de alto valor, atualize `memory-bank/consolidated_learnings.md`
+- Reflita sistematicamente sobre:
   - Erros encontrados e como foram resolvidos
   - Padrões que emergiram durante a execução
   - Oportunidades de melhoria nos protocolos existentes
 - Registre aprendizados no MCP Knowledge Graph quando aplicável
-- Atualize protocolos conforme necessário seguindo `self_improve.md`
+- Atualize protocolos conforme necessário seguindo `self-improvement-unified.md`
 
 ## Workflows e Ferramentas Disponíveis
 
