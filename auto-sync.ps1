@@ -14,7 +14,6 @@ $projects = @(
     "assessoria", 
     "extensions",
     "harmoniza-facil-agendas",
-    "mcp-r-task-manager",
     "neonpro",
     "taskmaster-integration",
     "trintae3",

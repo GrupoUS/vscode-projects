@@ -11,7 +11,7 @@ $secureToken = Read-Host -Prompt "Insira seu Token de Acesso Pessoal do GitHub (
 $token = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureToken))
 
 # Repositorios que ja existem no GitHub (confirmados)
-$existingProjects = @("assessoria", "mcp-r-task-manager")
+$existingProjects = @("assessoria")
 
 Write-Host "Sincronizando projetos existentes..." -ForegroundColor Yellow
 Write-Host ""

@@ -47,7 +47,6 @@ O sistema identificou os seguintes projetos:
 
 - 🏦 **aegiswallet** - Sistema de carteira financeira
 - 💼 **assessoria** - Sistema de assessoria
-- 🎯 **mcp-r-task-manager** - Gerenciador de tarefas MCP
 - 🔧 **taskmaster-integration** - Integração TaskMaster
 - 🎲 **trintae3** - Projeto Trintae3
 - 🔌 **extensions** - Extensões
@@ -162,7 +161,7 @@ cd ..
 
 ```powershell
 # Ver último commit de cada projeto
-$projects = @("aegiswallet", "assessoria", "mcp-r-task-manager", "taskmaster-integration", "trintae3", "extensions", "github-server")
+$projects = @("aegiswallet", "assessoria", "taskmaster-integration", "trintae3", "extensions", "github-server")
 
 foreach ($project in $projects) {
     if (Test-Path $project) {

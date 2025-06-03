@@ -40,7 +40,7 @@ try {
 
 Write-Host ""
 Write-Host "Projetos encontrados:" -ForegroundColor Blue
-$projects = @("aegiswallet", "assessoria", "mcp-r-task-manager", "taskmaster-integration", "trintae3", "extensions", "github-server")
+$projects = @("aegiswallet", "assessoria", "taskmaster-integration", "trintae3", "extensions", "github-server")
 
 foreach ($project in $projects) {
     if (Test-Path $project) {

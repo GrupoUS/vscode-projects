@@ -16,7 +16,7 @@ Write-Host "Iniciando push dos projetos..." -ForegroundColor Yellow
 Write-Host ""
 
 # Lista de projetos
-$projects = @("aegiswallet", "assessoria", "mcp-r-task-manager", "taskmaster-integration", "trintae3", "extensions")
+$projects = @("aegiswallet", "assessoria", "taskmaster-integration", "trintae3", "extensions")
 
 # Funcao para criar repositorio no GitHub
 function New-GitHubRepo {

@@ -27,13 +27,6 @@ Este workspace contém múltiplos projetos em desenvolvimento ativo, cada um com
 - **Status**: Em desenvolvimento ativo
 - **Características**: Interface híbrida (shadcn + DaisyUI), foco em segurança financeira
 
-### 4. **MCP R Task Manager** (`/mcp-r-task-manager/`)
-- **Tipo**: Gerenciador de Tarefas
-- **Tech Stack**: Next.js + TypeScript + Tailwind CSS
-- **Propósito**: Sistema de produtividade com integração MCP
-- **Status**: Em desenvolvimento
-- **Características**: Integração com Model Context Protocol
-
 ### 5. **Taskmaster Integration** (`/taskmaster-integration/`)
 - **Tipo**: Sistema de Integração
 - **Tech Stack**: Node.js + JavaScript

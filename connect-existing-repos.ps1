@@ -11,10 +11,10 @@ $secureToken = Read-Host -Prompt "Insira seu Token de Acesso Pessoal do GitHub (
 $token = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureToken))
 
 # Lista de projetos
-$projects = @("aegiswallet", "assessoria", "mcp-r-task-manager", "taskmaster-integration", "trintae3", "extensions")
+$projects = @("aegiswallet", "assessoria", "taskmaster-integration", "trintae3", "extensions")
 
 # Repositorios que ja existem no GitHub
-$existingRepos = @("assessoria", "mcp-r-task-manager")
+$existingRepos = @("assessoria")
 
 # Funcao para criar repositorio no GitHub
 function New-GitHubRepo {

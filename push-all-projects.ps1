@@ -20,7 +20,6 @@ $username = Read-Host "Digite seu username do GitHub"
 $projects = @(
     "aegiswallet",
     "assessoria", 
-    "mcp-r-task-manager",
     "taskmaster-integration",
     "trintae3",
     "extensions",
@@ -161,7 +160,7 @@ $autoPushScript = @"
 # Script de Push Automático
 # Execute este script sempre que quiser fazer push de todos os projetos
 
-`$projects = @("aegiswallet", "assessoria", "mcp-r-task-manager", "taskmaster-integration", "trintae3", "extensions", "github-server")
+`$projects = @("aegiswallet", "assessoria", "taskmaster-integration", "trintae3", "extensions", "github-server")
 
 Write-Host "🚀 Iniciando push automático..." -ForegroundColor Green
 

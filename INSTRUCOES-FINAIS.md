@@ -43,7 +43,6 @@ O script irá solicitar:
 Após a execução, verifique no GitHub se os repositórios foram criados:
 - https://github.com/SEU-USERNAME/aegiswallet
 - https://github.com/SEU-USERNAME/assessoria
-- https://github.com/SEU-USERNAME/mcp-r-task-manager
 - https://github.com/SEU-USERNAME/taskmaster-integration
 - https://github.com/SEU-USERNAME/trintae3
 - https://github.com/SEU-USERNAME/extensions
@@ -67,7 +66,6 @@ O sistema irá fazer push dos seguintes projetos:
 
 1. **🏦 aegiswallet** - Sistema de carteira financeira (Next.js + Supabase)
 2. **💼 assessoria** - Sistema de assessoria
-3. **🎯 mcp-r-task-manager** - Gerenciador de tarefas MCP (React)
 4. **🔧 taskmaster-integration** - Integração TaskMaster (Node.js)
 5. **🎲 trintae3** - Projeto Trintae3
 6. **🔌 extensions** - Extensões

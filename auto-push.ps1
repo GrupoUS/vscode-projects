@@ -4,7 +4,7 @@
 Write-Host "=== PUSH AUTOMATICO ===" -ForegroundColor Green
 Write-Host ""
 
-$projects = @("aegiswallet", "assessoria", "mcp-r-task-manager", "taskmaster-integration", "trintae3", "extensions")
+$projects = @("aegiswallet", "assessoria", "taskmaster-integration", "trintae3", "extensions")
 
 Write-Host "Iniciando push automatico..." -ForegroundColor Green
 
