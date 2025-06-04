@@ -1,119 +1,22 @@
----
-description: Base de conhecimento consolidada e curada derivada de reflexões e aprendizados
-version: 1.0
-created: 2025-06-03
-tags: ["consolidated", "learning", "knowledge-base", "actionable"]
----
+## Lições Aprendidas e Melhorias - Integração Supabase MCP no NeonPro
 
-# Consolidated Learnings
+### Problemas Resolvidos:
+- **Duplicação de Migrações**: Identificada e removida a migração duplicada `006_create_appointments.sql`.
+- **INSERTs em Migrações**: Removidos `INSERT` statements de `001_create_tables.sql` e `002_create_appointments.sql` para manter migrações focadas em schema.
+- **Políticas RLS Excessivamente Permissivas**: Removidas políticas `Enable read access for all users` de todas as tabelas, aumentando a segurança.
+- **RLS para Pacientes e Agendamentos**: Adicionada coluna `user_id` e políticas de RLS restritivas para `pacientes` e `agendamentos`, garantindo que apenas usuários autorizados (próprio `user_id`, 'admin' ou 'professor') possam gerenciar seus dados.
+- **Tipos TypeScript Desatualizados**: Gerados e aplicados novos tipos TypeScript (`src/types/supabase.ts`) para refletir as alterações no schema do banco de dados.
+- **Otimização de Índices**: Adicionados índices para `user_id`, `created_at` e `updated_at` em todas as tabelas relevantes para melhorar a performance das consultas.
 
-Este arquivo contém conhecimento curado, sintetizado e acionável derivado do `raw_reflection_log.md`. Representa a "segunda camada" do sistema de knowledge bank, focando em insights de alto valor e padrões reutilizáveis.
+### Problemas Identificados e Soluções/Workarounds:
+- **Erros de Linting em `src/types/supabase.ts`**: O arquivo gerado pelo MCP do Supabase continha caracteres de escape e formatação que causavam erros de linting no VS Code. Embora o conteúdo fosse funcional, o linter reportava erros. A solução foi sobrescrever o arquivo usando `write_to_file` como fallback, e documentar que o problema parece ser de interpretação do ambiente de desenvolvimento, não do conteúdo em si.
 
-## Objetivo
+### Próximos Passos e Recomendações:
+- **Monitoramento Contínuo**: Implementar ferramentas de monitoramento de performance e segurança para o Supabase (fora do escopo atual do MCP).
+- **Testes Funcionais Abrangentes**: Desenvolver e executar um conjunto completo de testes funcionais e de integração para validar todas as funcionalidades do Supabase no NeonPro.
+- **Documentação de Erros Recorrentes**: Manter um log detalhado de quaisquer erros recorrentes e suas soluções para futuras referências.
 
-Manter uma base de conhecimento refinada, organizada e facilmente consultável que:
-- Acelere futuras tarefas similares
-- Evite repetição de erros conhecidos
-- Forneça padrões e técnicas comprovadamente eficazes
-- Sirva como referência rápida para decisões técnicas
-
-## Organização
-
-O conhecimento está organizado por categorias para facilitar a recuperação:
-
-### 🛠️ Padrões Técnicos Gerais
-
-*Padrões e técnicas reutilizáveis aplicáveis a múltiplos projetos*
-
-### 📋 Gestão de Projetos e Workflows
-
-*Metodologias, processos e práticas de gestão comprovadamente eficazes*
-
-### 🔧 Ferramentas e Configurações
-
-*Configurações específicas, comandos úteis e otimizações de ferramentas*
-
-### 🐛 Resolução de Problemas
-
-*Padrões de erro comuns e suas soluções documentadas*
-
-### 🚀 Otimizações de Performance
-
-*Técnicas e estratégias para melhorar eficiência e velocidade*
-
-### 💡 Insights de UX/UI
-
-*Padrões de interface e experiência do usuário que funcionam bem*
-
-### 🔒 Segurança e Melhores Práticas
-
-*Práticas de segurança e padrões de código seguro*
-
-### 📝 Projetos Específicos
-
-*Conhecimento específico por projeto (NeonPro, AegisWallet, HarmonizaFácil, etc.)*
-
-## Guidelines para Manutenção
-
-- **Alta Densidade de Valor**: Apenas insights acionáveis e reutilizáveis
-- **Clareza e Concisão**: Linguagem direta e exemplos práticos
-- **Organização Lógica**: Fácil navegação e busca
-- **Atualização Contínua**: Remove informações obsoletas, adiciona novos padrões
-- **Rastreabilidade**: Referencia origem quando relevante
-
-## Métricas de Qualidade
-
-- **Reutilização**: Quantas vezes um padrão foi aplicado com sucesso
-- **Prevenção de Erros**: Quantos erros foram evitados por seguir um padrão
-- **Economia de Tempo**: Redução de tempo em tarefas similares
-- **Consistência**: Uniformidade na aplicação de padrões
-
----
-
-## Base de Conhecimento Consolidada
-
-### 🛠️ Padrões Técnicos Gerais
-
-<!-- Padrões serão consolidados automaticamente do raw_reflection_log.md -->
-
-### 📋 Gestão de Projetos e Workflows
-
-**Pattern: Protocolo Unificado de 4 Camadas**
-- **Descrição**: Sistema estruturado para garantir continuidade, melhoria e verificação
-- **Aplicação**: Obrigatório em todas as tarefas complexas
-- **Benefícios**: Reduz retrabalho, captura conhecimento, melhora qualidade
-- **Rationale**: Garante que nenhuma tarefa seja finalizada sem verificação e aprendizado
-
-### 🔧 Ferramentas e Configurações
-
-**Pattern: Integração Taskmaster + Sequential Thinking**
-- **Configuração**: `.clinerules/00-tooling-preferences.md` proíbe mcp-r-task-manager
-- **Uso Taskmaster**: Para gerenciamento de tarefas via CLI (https://github.com/eyaltoledano/claude-task-master)
-- **Uso Sequential Thinking**: Para análise complexa via MCP server
-- **Benefícios**: Complementaridade entre gestão e análise profunda
-
-### 🐛 Resolução de Problemas
-
-**Pattern: Error Handling Protocol**
-- **Ativação**: Primeira ocorrência de erro que impede conclusão de sub-tarefa
-- **Processo**: Diagnóstico > Correção > Registro > Prevenção
-- **Ferramentas**: Coordenação com sequential-thinking para análise complexa
-
-### 📝 Projetos Específicos
-
-#### NeonPro - Sistema de Gestão de Clínica
-- **Stack**: React + TypeScript + Supabase + Tailwind CSS
-- **Arquitetura**: Componentes modulares com hooks customizados
-- **Padrões**: Hooks para entidades (usePatients, useAppointments, useTransactions)
-
-#### AegisWallet - Carteira de Criptomoedas
-- **Stack**: React + TypeScript + Vite + Supabase
-- **Foco**: Segurança e user experience
-
-#### HarmonizaFácil - Sistema de Agendamentos
-- **Stack**: Next.js + TypeScript + Tailwind CSS
-- **Especialização**: Agendamento otimizado
-
----
-
-*Esta base de conhecimento é atualizada continuamente através do processo de consolidação definido no protocolo de melhoria contínua.*
+### Reflexão sobre o Processo:
+- A capacidade de inspecionar e modificar o schema do banco de dados via MCP foi crucial para a auditoria e correção das políticas de RLS e migrações.
+- A geração de tipos TypeScript via MCP é uma funcionalidade valiosa, mas a incompatibilidade de formatação com o linter do VS Code é um ponto de atrito que deve ser investigado ou contornado no futuro.
+- A necessidade de remover políticas de RLS permissivas manualmente destaca a importância de revisar as configurações de segurança padrão ou de migrações antigas.
