@@ -21,7 +21,7 @@ function Sync-GitRepository {
 
         if ($status -match "Changes not staged for commit" -or $status -match "Changes to be committed") {
             Write-Host "Salvando alterações locais com git stash..."
-            git stash push -m "Local changes before pull - $(Split-Path $RepoPath -Leaf)"
+            git stash push -m "Local changes before pull"
             if ($LASTEXITCODE -ne 0) {
                 Write-Warning "Falha ao stashear alterações locais em $RepoPath. Tentando continuar."
             }
@@ -51,7 +51,7 @@ function Sync-GitRepository {
         # 3. Aplicar stash de volta
         Write-Host "Aplicando alterações locais do stash..."
         $stashList = git stash list
-        if ($stashList -match "Local changes before pull - $(Split-Path $RepoPath -Leaf)") { # Usar o nome da pasta para identificar o stash
+        if ($stashList -match "Local changes before pull") { # Simplificar a regex para evitar problemas com caminhos
             git stash pop
             if ($LASTEXITCODE -ne 0) {
                 Write-Warning "Falha ao aplicar stash em $RepoPath. Pode haver conflitos ao aplicar o stash."
@@ -81,9 +81,17 @@ function Sync-GitRepository {
 
         # 5. Fazer push para o repositório remoto
         Write-Host "Fazendo push para o repositório remoto..."
-        git push
+        $pushResult = git push 2>&1
         if ($LASTEXITCODE -ne 0) {
-            throw "Falha ao executar git push em $RepoPath."
+            if ($pushResult -match "has no upstream branch") {
+                Write-Warning "Branch local não tem upstream configurado. Tentando configurar upstream..."
+                git push --set-upstream origin main
+                if ($LASTEXITCODE -ne 0) {
+                throw "Falha ao configurar upstream e executar git push em ${RepoPath}."
+                }
+            } else {
+                throw "Falha ao executar git push em ${RepoPath}: ${pushResult}"
+            }
         }
 
         Write-Host "Sincronização concluída com sucesso para $RepoPath." -ForegroundColor Green
