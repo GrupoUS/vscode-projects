@@ -8,13 +8,14 @@ dev-debug.log
 
 # Dependency directories
 node_modules/
+bun.lockb
 
 # Environment variables
 .env
 
 # Editor directories and files
 .idea
-.vscode
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
@@ -23,6 +24,11 @@ node_modules/
 
 # OS specific
 .DS_Store
+
+# Build artifacts
+dist/
+build/
+.next/
 
 # Task files
 tasks.json
@@ -33,3 +39,34 @@ tasks/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Cline/Taskmaster specific
+.ai_memory/
+.clinerules/
+.taskmaster/
+memory-bank/
+mcp-status-report.md
+argv.json
+index.js
+playwright_confirmation-*.png
+TASK-MASTER-INTEGRATION-COMPLETE.md
+taskmaster-integration-prd.txt
+VSCODE.code-workspace
+
+# Scripts e documentacao do sistema de push
+auto-push.ps1
+auto-sync.ps1
+connect-existing-repos.ps1
+execute-push-now.ps1
+final-push.ps1
+INSTRUCOES-FINAIS.md
+push-all-projects.ps1
+quick-push.ps1
+README-GITHUB-SETUP.md
+sync-all-repos.ps1
+sync-existing-only.ps1
+test-git-setup.ps1
+
+# Git specific
+.git/
+.github/
