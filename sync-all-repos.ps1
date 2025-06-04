@@ -31,7 +31,13 @@ function Sync-GitRepository {
 
         # 2. Fazer pull das alterações remotas
         Write-Host "Fazendo pull das alterações remotas..."
-        git pull origin main # Assumindo 'main' como branch principal
+        # Adicionar --allow-unrelated-histories para repositórios recém-inicializados
+        $pullCommand = "git pull origin main"
+        if ($RepoPath -like "*aegiswallet*") { # Condição específica para aegiswallet
+            $pullCommand += " --allow-unrelated-histories"
+        }
+        Invoke-Expression $pullCommand # Executa o comando construído
+
         if ($LASTEXITCODE -ne 0) {
             Write-Error "Falha ao executar git pull em $RepoPath. Pode haver conflitos."
             # Tentar resolver conflitos automaticamente se possível
